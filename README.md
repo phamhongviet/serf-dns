@@ -13,6 +13,15 @@ $ dig +short redis.oregon.serf
 192.168.10.13
 ```
 
+Tags' order doesn't matter
+
+```
+$ dig +short oregon.redis.serf
+192.168.10.11
+192.168.10.13
+192.168.10.12
+```
+
 Or to query a server with hostname node7:
 
 ```
