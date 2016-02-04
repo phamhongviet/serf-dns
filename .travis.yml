@@ -5,8 +5,11 @@ go:
   - 1.5
 
 install:
+  - go get github.com/golang/lint/golint
   - go get github.com/hashicorp/serf/client
   - go get github.com/miekg/dns
 
 script:
+  - gofmt -d .
+  - golint ./...
   - go test
