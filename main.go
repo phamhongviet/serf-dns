@@ -16,10 +16,12 @@ const defaultDomainName = "serf."
 func handle(writer dns.ResponseWriter, request *dns.Msg) {
 	message := new(dns.Msg)
 	message.SetReply(request)
-	rr := new(dns.A)
-	rr.Hdr = dns.RR_Header{Name: "localhost.serf.", Rrtype: dns.TypeA, Class: dns.ClassINET, Ttl: 0}
-	rr.A = net.ParseIP("127.0.0.1").To4()
-	message.Answer = append(message.Answer, rr)
+	/*
+	TODO
+	turn questions into serf filters
+	for each serf filters, get a set of hosts from serf agent
+	create and add answers from the above set of hosts
+	*/
 	err := writer.WriteMsg(message)
 	if err != nil {
 		fmt.Println(err.Error())
