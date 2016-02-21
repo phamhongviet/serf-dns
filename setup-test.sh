@@ -14,3 +14,9 @@ docker run -d $SERF agent -tag role=web -tag dc=oreg -tag srv=foo -join $LEADER_
 
 docker run -d $SERF agent -tag role=db -tag dc=cali -join $LEADER_IP
 docker run -d $SERF agent -tag role=db -tag dc=oreg -join $LEADER_IP
+
+DEAD=`docker run -d $SERF agent -tag role=web -tag dc=oreg -tag srv=bar -join $LEADER_IP`
+DEAD="$DEAD `docker run -d $SERF agent -tag role=web -tag dc=cali -tag srv=foo -join $LEADER_IP`"
+sleep 0.5
+docker stop -t 0 $DEAD
+docker rm $DEAD
