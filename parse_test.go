@@ -19,3 +19,23 @@ func TestParseDomainName(t *testing.T) {
 		t.Errorf("Failed to parse domain name %s", domainNameSample)
 	}
 }
+
+func TestFindTag(t *testing.T) {
+	sample := "a.b.c.d."
+
+	expectedTagName := "b"
+	expectedTagValue := "a"
+	expectedRemain := "c.d."
+
+	resultTagName, resultTagValue, resultRemain := findTag(sample)
+
+	if expectedTagName != resultTagName {
+		t.Errorf("Failed to find tag in domain name")
+	}
+	if expectedTagValue != resultTagValue {
+		t.Errorf("Failed to find tag in domain name")
+	}
+	if expectedRemain != resultRemain {
+		t.Errorf("Failed to find tag in domain name")
+	}
+}

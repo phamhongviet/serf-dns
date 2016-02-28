@@ -1,6 +1,19 @@
 package main
 
+import (
+	"strings"
+)
+
 func parseDomainName(domainName string) serfFilter {
-	var sf serfFilter
+	domainName = strings.TrimSuffix(domainName, defaultDomainName)
+	sf := serfFilter{
+		Name:   "",
+		Status: "alive",
+		Tags:   map[string]string{},
+	}
 	return sf
+}
+
+func findTag(domainName string) (tagName, tagValue, remain string) {
+	return "", "", ""
 }
