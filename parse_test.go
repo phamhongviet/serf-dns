@@ -14,7 +14,6 @@ func TestParseDomainName(t *testing.T) {
 		Status: "alive",
 	}
 	resultSerfFilter := parseDomainName(domainNameSample)
-	// TODO: implement compare serf filters
 	ok := expectedSerfFilter.Compare(resultSerfFilter)
 	if !ok {
 		t.Errorf("Failed to parse domain name %s", domainNameSample)
