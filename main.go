@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"os"
 	"os/signal"
 	"syscall"
@@ -17,10 +16,10 @@ func handle(writer dns.ResponseWriter, request *dns.Msg) {
 	message := new(dns.Msg)
 	message.SetReply(request)
 	/*
-	TODO
-	turn questions into serf filters
-	for each serf filters, get a set of hosts from serf agent
-	create and add answers from the above set of hosts
+		TODO
+		turn questions into serf filters
+		for each serf filters, get a set of hosts from serf agent
+		create and add answers from the above set of hosts
 	*/
 	err := writer.WriteMsg(message)
 	if err != nil {
