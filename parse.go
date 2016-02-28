@@ -14,6 +14,11 @@ func parseDomainName(domainName string) serfFilter {
 	return sf
 }
 
-func findTag(domainName string) (tagName, tagValue, remain string) {
-	return "", "", ""
+func findTag(domainName string) (tagValue, tagName, remain string) {
+	if domainName == "" {
+		return "", "", ""
+	}
+
+	res := strings.SplitN(domainName, ".", 3)
+	return res[0], res[1], res[2]
 }
