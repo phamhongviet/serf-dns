@@ -6,11 +6,22 @@ import (
 
 func parseDomainName(domainName string) serfFilter {
 	domainName = strings.TrimSuffix(domainName, defaultDomainName)
+
+	tags := make(map[string]string)
+
+	for domainName != "" {
+		tagValue, tagName, remain := findTag(domainName)
+
+		tags[tagName] = tagValue
+		domainName = remain
+	}
+
 	sf := serfFilter{
 		Name:   "",
 		Status: "alive",
-		Tags:   map[string]string{},
+		Tags:   tags,
 	}
+
 	return sf
 }
 
