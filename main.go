@@ -11,6 +11,7 @@ import (
 
 const defaultAddr = ":5327"
 const defaultDomainName = "serf."
+const defaultSerfRPCAddress = "127.0.0.1:7373"
 
 func handle(writer dns.ResponseWriter, request *dns.Msg) {
 	message := new(dns.Msg)
