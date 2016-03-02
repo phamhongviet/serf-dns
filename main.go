@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	serf_client "github.com/hashicorp/serf/client"
 	"github.com/miekg/dns"
 )
 
@@ -13,7 +14,7 @@ const defaultAddr = ":5327"
 const defaultDomainName = "serf."
 const defaultSerfRPCAddress = "127.0.0.1:7373"
 
-func handle(writer dns.ResponseWriter, request *dns.Msg) {
+func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient serf_client.RPCClient) {
 	message := new(dns.Msg)
 	message.SetReply(request)
 	/*
@@ -37,7 +38,16 @@ func serve(net string, address string) {
 }
 
 func main() {
-	dns.HandleFunc(defaultDomainName, handle)
+	// connect to serf agent
+	serfClient, err := client.NewRPCClient(defaultSerfRPCAddress)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	dns.HandleFunc(defaultDomainName,
+		func(writer dns.ResponseWriter, request *dns.Msg) {
+			handle(writer, request, serfClient)
+		})
 	go serve("tcp", defaultAddr)
 	go serve("udp", defaultAddr)
 	sig := make(chan os.Signal)
