@@ -14,14 +14,23 @@ const defaultAddr = ":5327"
 const defaultDomainName = "serf."
 const defaultSerfRPCAddress = "127.0.0.1:7373"
 
-func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient serf_client.RPCClient) {
+func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client.RPCClient) {
 	message := new(dns.Msg)
 	message.SetReply(request)
+
+	for _, question := range request.Question {
+		filter := parseDomainName(question.Name)
+		hosts, err := serfClient.MembersFiltered(filter.Tags, filter.Status, filter.Name)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		for _, host := range hosts {
+			fmt.Printf("%s -> %s\n", question.Name, host.Addr.String())
+		}
+	}
+
 	/*
-		TODO
-		turn questions into serf filters
-		for each serf filters, get a set of hosts from serf agent
-		create and add answers from the above set of hosts
+		TODO: create and add answers from the above set of hosts
 	*/
 	err := writer.WriteMsg(message)
 	if err != nil {
@@ -39,7 +48,7 @@ func serve(net string, address string) {
 
 func main() {
 	// connect to serf agent
-	serfClient, err := client.NewRPCClient(defaultSerfRPCAddress)
+	serfClient, err := serf_client.NewRPCClient(defaultSerfRPCAddress)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
