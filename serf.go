@@ -3,6 +3,8 @@ package main
 import (
 	"reflect"
 	"strings"
+
+	serf_client "github.com/hashicorp/serf/client"
 )
 
 type serfFilter struct {
@@ -21,4 +23,8 @@ func (sf1 *serfFilter) Compare(sf2 serfFilter) bool {
 	}
 
 	return reflect.DeepEqual(sf1.Tags, sf2.Tags)
+}
+
+func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
+	return serf_client.NewRPCClient(serfRPCAddress)
 }
