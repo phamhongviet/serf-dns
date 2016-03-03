@@ -29,6 +29,12 @@ func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
 	return serf_client.NewRPCClient(serfRPCAddress)
 }
 
+func closeSerfConnection(client *serf_client.RPCClient) {
+	if client != nil {
+		client.Close()
+	}
+}
+
 func getSerfMembers(client *serf_client.RPCClient, filter serfFilter) ([]serf_client.Member, error) {
 	return client.MembersFiltered(filter.Tags, filter.Status, filter.Name)
 }
