@@ -47,8 +47,7 @@ func serve(net string, address string) {
 }
 
 func main() {
-	// connect to serf agent
-	serfClient, err := serf_client.NewRPCClient(defaultSerfRPCAddress)
+	serfClient, err := connectSerfAgent(defaultSerfRPCAddress)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
