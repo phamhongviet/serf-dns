@@ -28,3 +28,7 @@ func (sf1 *serfFilter) Compare(sf2 serfFilter) bool {
 func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
 	return serf_client.NewRPCClient(serfRPCAddress)
 }
+
+func getSerfMembers(client *serf_client.RPCClient, filter serfFilter) ([]serf_client.Member, error) {
+	return client.MembersFiltered(filter.Tags, filter.Status, filter.Name)
+}

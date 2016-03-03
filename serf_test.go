@@ -72,3 +72,32 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 		t.Errorf("Connect to default address return opened client. Did you setup test environment?")
 	}
 }
+
+func TestGetSerfMembers(t *testing.T) {
+	client, err := connectSerfAgent(defaultSerfRPCAddress)
+	defer func() {
+		if client != nil {
+			client.Close()
+		}
+	}()
+	if err != nil {
+		t.Errorf("Connect to default address return no error. Did you setup test environment?")
+	}
+
+	filter := serfFilter{
+		Name:   "",
+		Status: "alive",
+		Tags: map[string]string{
+			"role": "web",
+			"dc":   "cali",
+		},
+	}
+
+	members, err := getSerfMembers(client, filter)
+	if err != nil {
+		t.Errorf("Connect to default address return no error. Did you setup test environment?")
+	}
+	if members == nil {
+		t.Errorf("No members found from serf. Did you setup test environment?")
+	}
+}
