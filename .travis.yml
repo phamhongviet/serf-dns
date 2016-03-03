@@ -1,13 +1,24 @@
+sudo: required
+
 language: go
+
+services:
+  - docker
 
 go:
   - 1.4
   - 1.5
 
+before_install:
+  - docker pull quay.io/phamhongviet/serf
+
 install:
   - go get github.com/golang/lint/golint
   - go get github.com/hashicorp/serf/client
   - go get github.com/miekg/dns
+
+before_script:
+  - ./setup-test.sh
 
 script:
   - gofmt -d .
