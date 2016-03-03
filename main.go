@@ -48,6 +48,11 @@ func serve(net string, address string) {
 
 func main() {
 	serfClient, err := connectSerfAgent(defaultSerfRPCAddress)
+	defer func() {
+		if serfClient != nil {
+			serfClient.Close()
+		}
+	}()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
