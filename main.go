@@ -20,7 +20,7 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 
 	for _, question := range request.Question {
 		filter := parseDomainName(question.Name)
-		hosts, err := serfClient.MembersFiltered(filter.Tags, filter.Status, filter.Name)
+		hosts, err := getSerfMembers(serfClient, filter)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
