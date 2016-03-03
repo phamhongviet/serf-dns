@@ -41,11 +41,7 @@ func TestSerfFilterCompare(t *testing.T) {
 
 func TestConnectSerfAgentExpectingFailure(t *testing.T) {
 	client, err := connectSerfAgent("127.0.0.1:55555")
-	defer func() {
-		if client != nil {
-			client.Close()
-		}
-	}()
+	defer closeSerfConnection(client)
 
 	if err == nil {
 		t.Errorf("Connect to wrong address return no error")
@@ -58,11 +54,7 @@ func TestConnectSerfAgentExpectingFailure(t *testing.T) {
 
 func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 	client, err := connectSerfAgent(defaultSerfRPCAddress)
-	defer func() {
-		if client != nil {
-			client.Close()
-		}
-	}()
+	defer closeSerfConnection(client)
 
 	if err != nil {
 		t.Errorf("Connect to default address return no error. Did you setup test environment?")
@@ -75,11 +67,7 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 
 func TestGetSerfMembers(t *testing.T) {
 	client, err := connectSerfAgent(defaultSerfRPCAddress)
-	defer func() {
-		if client != nil {
-			client.Close()
-		}
-	}()
+	defer closeSerfConnection(client)
 	if err != nil {
 		t.Errorf("Connect to default address return no error. Did you setup test environment?")
 	}
