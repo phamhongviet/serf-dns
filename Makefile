@@ -9,7 +9,7 @@ test: setup-test
 	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app --link `head -n 1 $(TEST_CONTAINER_IDS_FILE)`:serf $(GOLANG_IMAGE) go test
 
 build:
-	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app -e CGO_ENABLED=0 $(GOLANG_IMAGE) go build -ldflags "-s" -a -installsuffix cgo -o tadis
+	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app -e CGO_ENABLED=0 $(GOLANG_IMAGE) go build -ldflags "-s" -a -installsuffix cgo -o serf-dns
 
 clean:
 	cat $(TEST_CONTAINER_IDS_FILE) | xargs docker stop | xargs docker rm
