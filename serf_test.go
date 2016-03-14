@@ -4,6 +4,10 @@ import (
 	"testing"
 )
 
+const (
+	testSerfRPCAddress = "serf:7373"
+)
+
 func TestSerfFilterCompare(t *testing.T) {
 	sf1 := serfFilter{
 		Name:   "",
@@ -53,7 +57,7 @@ func TestConnectSerfAgentExpectingFailure(t *testing.T) {
 }
 
 func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
-	client, err := connectSerfAgent(defaultSerfRPCAddress)
+	client, err := connectSerfAgent(testSerfRPCAddress)
 	defer closeSerfConnection(client)
 
 	if err != nil {
@@ -66,7 +70,7 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 }
 
 func TestGetSerfMembers(t *testing.T) {
-	client, err := connectSerfAgent(defaultSerfRPCAddress)
+	client, err := connectSerfAgent(testSerfRPCAddress)
 	defer closeSerfConnection(client)
 	if err != nil {
 		t.Errorf("Connect to default address return no error. Did you setup test environment?")
