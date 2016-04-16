@@ -82,6 +82,11 @@ func TestConnectSerfAgentWithAuthKey(t *testing.T) {
 	if client == nil {
 		t.Errorf("Connect to serf-auth address return nil client. Did you setup test environment?")
 	}
+
+	_, err = client.Members()
+	if err != nil {
+		t.Errorf("Cannot retrieve member list. Wrong RPC auth key?")
+	}
 }
 
 func TestGetSerfMembers(t *testing.T) {
