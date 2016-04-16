@@ -49,3 +49,22 @@ To build the binary executable file `serf-dns`:
 ```
 make build
 ```
+
+After building `serf-dns`, you can play with it:
+
+```
+./serf-dns
+```
+
+And in another terminal, send some DNS requests to it:
+
+```
+dig @localhost -p 5327 web.role.serf
+dig @localhost -p 5327 db.role.serf
+dig @localhost -p 5327 oreg.dc.web.role.serf
+dig @localhost -p 5327 db.role.cali.dc.serf
+dig @localhost -p 5327 foo.srv.serf
+dig @localhost -p 5327 bar.srv.serf
+```
+
+And you can compare the result using `serf members`
