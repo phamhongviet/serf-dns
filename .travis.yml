@@ -18,9 +18,7 @@ install:
   - go get github.com/miekg/dns
 
 before_script:
-  - ./setup-test.sh
+  - make setup-test
 
 script:
-  - gofmt -d .
-  - golint ./...
-  - go test
+  - make test
