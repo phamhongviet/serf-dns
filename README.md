@@ -28,3 +28,18 @@ Or to query a server with hostname node7.examp.le:
 $ dig +short node7.examp.le.name.serf
 192.168.7.17
 ```
+
+## Develop
+This project is currently develop in Golang 1.6 with `docker` and `make`
+
+To test the project:
+
+```
+make test
+```
+
+To build the binary executable file `serf-dns`:
+
+```
+make build
+```
