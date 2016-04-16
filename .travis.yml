@@ -7,6 +7,7 @@ services:
 
 before_install:
   - docker pull quay.io/phamhongviet/serf
+  - docker pull golang:1.6-alpine
 
 install:
   - go get github.com/golang/lint/golint
