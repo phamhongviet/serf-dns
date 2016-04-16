@@ -73,6 +73,15 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 
 func TestConnectSerfAgentWithAuthKey(t *testing.T) {
 	client, err := connectSerfAgentWithAuthKey(testSerfRPCAddressWithAuth, serfAuthKey)
+	defer closeSerfConnection(client)
+
+	if err != nil {
+		t.Errorf("Connect to serf-auth address return error. Did you setup test environment?")
+	}
+
+	if client == nil {
+		t.Errorf("Connect to serf-auth address return nil client. Did you setup test environment?")
+	}
 }
 
 func TestGetSerfMembers(t *testing.T) {
