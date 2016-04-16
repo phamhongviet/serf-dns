@@ -38,12 +38,6 @@ To test the project:
 make test
 ```
 
-Testing the project need a few serf agents running in docker containers. To clean those up, run:
-
-```
-make clean
-```
-
 To build the binary executable file `serf-dns`:
 
 ```
@@ -68,3 +62,9 @@ dig @localhost -p 5327 bar.srv.serf
 ```
 
 And you can compare the result using `serf members`
+
+Testing and playing with the project need a few serf agents running in docker containers. To clean those up, run:
+
+```
+make clean
+```
