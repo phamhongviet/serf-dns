@@ -14,7 +14,7 @@ setup-test:
 test: setup-test get-deps
 	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app $(GOLANG_IMAGE) gofmt -d .
 	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app $(GOLANG_IMAGE) golint ./...
-	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app --link `head -n 1 $(TEST_CONTAINER_IDS_FILE)`:serf $(GOLANG_IMAGE) go test
+	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app --link `head -n 1 $(TEST_CONTAINER_IDS_FILE)`:serf --link `sed '2q;d' $(TEST_CONTAINER_IDS_FILE)`:serf-auth $(GOLANG_IMAGE) go test
 
 build:
 	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app -e CGO_ENABLED=0 $(GOLANG_IMAGE) go build -ldflags "-s" -a -installsuffix cgo -o serf-dns
