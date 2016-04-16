@@ -6,6 +6,8 @@ setup-test:
 	test -f $(TEST_CONTAINER_IDS_FILE) || ./setup-test.sh > $(TEST_CONTAINER_IDS_FILE)
 
 test: setup-test
+	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app $(GOLANG_IMAGE) gofmt -d .
+	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app $(GOLANG_IMAGE) golint ./...
 	docker run --rm -v $(GOPATH):/go -v $(PWD):/app -w /app --link `head -n 1 $(TEST_CONTAINER_IDS_FILE)`:serf $(GOLANG_IMAGE) go test
 
 build:
