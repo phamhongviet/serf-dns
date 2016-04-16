@@ -5,6 +5,8 @@ import (
 )
 
 func TestParseDomainName(t *testing.T) {
+	config.Parse()
+
 	domainNameSample := "foo.srv.cali.dc.serf."
 	expectedSerfFilter := serfFilter{
 		Tags: map[string]string{
