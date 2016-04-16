@@ -12,7 +12,7 @@ func newHostRecord(name string, IP net.IP, TTL uint32) dns.A {
 			Name:     name,
 			Rrtype:   0,
 			Class:    0,
-			Ttl:      0,
+			Ttl:      TTL,
 			Rdlength: 0,
 		},
 		A: IP,
