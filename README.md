@@ -78,8 +78,25 @@ Testing and playing with the project need a few serf agents running in docker co
 make clean
 ```
 
+## Configuration
+
+Serf-dns can be configured using environment variables or command line parameters.
+
+* __bind__: bind with IP address and port.         
+Default: Bind all interfaces with port 5327.         
+Use environment variable `BIND` or parameter `--bind=`.         
+For example, to bind localhost with port 5300:           
+
+```
+BIND='127.0.0.1:5300' ./serf-dns
+```
+```
+./serf-dns --bind='127.0.0.1:5300'
+```
+  
+
 ## TODO
 
 * Support hostname query
-* Support configuration, either by file or params
+* Support configuration with file
 * Clean and test functions in main.go
