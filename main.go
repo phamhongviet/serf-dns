@@ -25,7 +25,6 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 			fmt.Println(err.Error())
 		}
 		for _, host := range hosts {
-			fmt.Printf("%s -> %s\n", question.Name, host.Addr.String())
 			var newRR dns.RR
 			newHost := newHostRecord(question.Name, host.Addr, 0)
 			newRR = &newHost
