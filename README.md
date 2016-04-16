@@ -77,3 +77,9 @@ Testing and playing with the project need a few serf agents running in docker co
 ```
 make clean
 ```
+
+## TODO
+
+* Support hostname query
+* Support configuration, either by file or params
+* Clean and test functions in main.go
