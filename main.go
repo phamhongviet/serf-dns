@@ -26,12 +26,13 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 		}
 		for _, host := range hosts {
 			fmt.Printf("%s -> %s\n", question.Name, host.Addr.String())
+			var newRR dns.RR
+			newHost := newHostRecord(question.Name, host.Addr, 0)
+			newRR = &newHost
+			message.Answer = append(message.Answer, newRR)
 		}
 	}
 
-	/*
-		TODO: create and add answers from the above set of hosts
-	*/
 	err := writer.WriteMsg(message)
 	if err != nil {
 		fmt.Println(err.Error())
