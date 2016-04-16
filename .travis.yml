@@ -13,9 +13,7 @@ before_install:
   - docker pull golang:1.6-alpine
 
 install:
-  - go get github.com/golang/lint/golint
-  - go get github.com/hashicorp/serf/client
-  - go get github.com/miekg/dns
+  - make get-deps
 
 before_script:
   - make setup-test
