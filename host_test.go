@@ -20,6 +20,9 @@ func TestNewHostRecord(t *testing.T) {
 	if host.Hdr.Rrtype != dns.TypeA {
 		t.Errorf("Failed to create new host record, wrong RR type.")
 	}
+	if host.Hdr.Class != dns.ClassINET {
+		t.Errorf("Failed to create new host record, wrong class.")
+	}
 	if host.Hdr.Ttl != 7 {
 		t.Errorf("Failed to create new host record, wrong TTL.")
 	}
