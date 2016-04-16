@@ -110,6 +110,15 @@ SERF='127.0.0.1:8000' ./serf-dns
 ./serf-dns --serf='127.0.0.1:8000'
 ```
 
+* __serf-auth__: serf RPC auth key           
+Default: empty        
+Use environment variable `SERF_AUTH` or parameter `--serf-auth=`        
+For example, if serf agent RPC interface require key `S3creTT0k3n`, use:
+```
+SERF_AUTH='S3creTT0k3n' ./serf-dns
+./serf-dns --serf-auth='S3creTT0k3n'
+```
+
 ## TODO
 
 * Support hostname query
