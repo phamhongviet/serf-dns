@@ -11,7 +11,7 @@ func newHostRecord(name string, IP net.IP, TTL uint32) dns.A {
 		Hdr: dns.RR_Header{
 			Name:     name,
 			Rrtype:   dns.TypeA,
-			Class:    0,
+			Class:    dns.ClassINET,
 			Ttl:      TTL,
 			Rdlength: 0,
 		},
