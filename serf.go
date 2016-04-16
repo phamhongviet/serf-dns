@@ -30,7 +30,10 @@ func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
 }
 
 func connectSerfAgentWithAuthKey(serfRPCAddress string, serfRPCAuthKey string) (*serf_client.RPCClient, error) {
-	return nil, nil
+	return serf_client.ClientFromConfig(&serf_client.Config{
+		Addr:    serfRPCAddress,
+		AuthKey: serfRPCAuthKey,
+	})
 }
 
 func closeSerfConnection(client *serf_client.RPCClient) {
