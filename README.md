@@ -114,4 +114,5 @@ SERF='127.0.0.1:8000' ./serf-dns
 
 * Support hostname query
 * Support configuration with file
+* Support authentication in serf agent
 * Clean and test functions in main.go
