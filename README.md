@@ -86,13 +86,20 @@ Serf-dns can be configured using environment variables or command line parameter
 Default: Bind all interfaces with port 5327.         
 Use environment variable `BIND` or parameter `--bind=`.         
 For example, to bind localhost with port 5300:           
-
 ```
 BIND='127.0.0.1:5300' ./serf-dns
-```
-```
 ./serf-dns --bind='127.0.0.1:5300'
 ```
+
+* __domain-name__: domain name for serf hosts        
+Default: `serf.`       
+Use environment variable `DOMAIN_NAME` or parameter `--domain-name=`.            
+For example, to use domain name `my.dn.`:              
+```
+DOMAIN_NAME='my.dn.' ./serf-dns
+./serf-dns --domain-name='my.dn.'
+```
+_Note_: It is important to have `.` at the end of domain name
   
 
 ## TODO
