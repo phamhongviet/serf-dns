@@ -10,10 +10,6 @@ import (
 	"github.com/miekg/dns"
 )
 
-const defaultAddr = ":5327"
-const defaultDomainName = "serf."
-const defaultSerfRPCAddress = "127.0.0.1:7373"
-
 func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client.RPCClient) {
 	message := new(dns.Msg)
 	message.SetReply(request)
@@ -47,18 +43,20 @@ func serve(net string, address string) {
 }
 
 func main() {
-	serfClient, err := connectSerfAgent(defaultSerfRPCAddress)
+	config.Parse()
+
+	serfClient, err := connectSerfAgent(configSerfRPCAddress)
 	defer closeSerfConnection(serfClient)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 
-	dns.HandleFunc(defaultDomainName,
+	dns.HandleFunc(configDomainName,
 		func(writer dns.ResponseWriter, request *dns.Msg) {
 			handle(writer, request, serfClient)
 		})
-	go serve("tcp", defaultAddr)
-	go serve("udp", defaultAddr)
+	go serve("tcp", configBind)
+	go serve("udp", configBind)
 	sig := make(chan os.Signal)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 forever:
