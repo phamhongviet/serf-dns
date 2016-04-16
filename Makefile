@@ -8,6 +8,12 @@ get-deps:
 	go get github.com/miekg/dns
 	go get github.com/paked/configure
 
+update-deps:
+	go get -u github.com/golang/lint/golint
+	go get -u github.com/hashicorp/serf/client
+	go get -u github.com/miekg/dns
+	go get -u github.com/paked/configure
+
 setup-test:
 	test -f $(TEST_CONTAINER_IDS_FILE) || ./setup-test.sh > $(TEST_CONTAINER_IDS_FILE)
 
