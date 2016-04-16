@@ -80,7 +80,7 @@ make clean
 
 ## Configuration
 
-Serf-dns can be configured using environment variables or command line parameters.
+Serf-dns can be configured using environment variables or command line parameters. If both environment variable and parameter for the same directive are provided, serf-dns will use environment variable.
 
 * __bind__: bind with IP address and port.         
 Default: Bind all interfaces with port 5327.         
@@ -100,7 +100,15 @@ DOMAIN_NAME='my.dn.' ./serf-dns
 ./serf-dns --domain-name='my.dn.'
 ```
 _Note_: It is important to have `.` at the end of domain name
-  
+
+* __serf__: serf RPC address            
+Default: 127.0.0.1:7373            
+Use environment variable `SERF` or parameter `--serf=`.            
+For example, if serf agent is run at localhost port 8000, use:
+```
+SERF='127.0.0.1:8000' ./serf-dns
+./serf-dns --serf='127.0.0.1:8000'
+```
 
 ## TODO
 
