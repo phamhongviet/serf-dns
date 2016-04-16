@@ -5,7 +5,7 @@ import (
 )
 
 func parseDomainName(domainName string) serfFilter {
-	domainName = strings.TrimSuffix(domainName, configDomainName)
+	domainName = strings.TrimSuffix(domainName, *configDomainName)
 
 	tags := make(map[string]string)
 

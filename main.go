@@ -45,18 +45,18 @@ func serve(net string, address string) {
 func main() {
 	config.Parse()
 
-	serfClient, err := connectSerfAgent(configSerfRPCAddress)
+	serfClient, err := connectSerfAgent(*configSerfRPCAddress)
 	defer closeSerfConnection(serfClient)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 
-	dns.HandleFunc(configDomainName,
+	dns.HandleFunc(*configDomainName,
 		func(writer dns.ResponseWriter, request *dns.Msg) {
 			handle(writer, request, serfClient)
 		})
-	go serve("tcp", configBind)
-	go serve("udp", configBind)
+	go serve("tcp", *configBind)
+	go serve("udp", *configBind)
 	sig := make(chan os.Signal)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 forever:
