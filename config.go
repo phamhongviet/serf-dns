@@ -9,6 +9,7 @@ var (
 	configBind           = config.String("bind", ":5327", "Bind with IP address and port")
 	configDomainName     = config.String("domain-name", "serf.", "Domain name")
 	configSerfRPCAddress = config.String("serf", "127.0.0.1:7373", "Serf RPC Address")
+	configSerfRPCAuthKey = config.String("serf-auth", "", "Serf RPC auth key")
 )
 
 func init() {
