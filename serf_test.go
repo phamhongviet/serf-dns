@@ -5,7 +5,9 @@ import (
 )
 
 const (
-	testSerfRPCAddress = "serf:7373"
+	testSerfRPCAddress         = "serf:7373"
+	testSerfRPCAddressWithAuth = "serf-auth:7373"
+	serfAuthKey                = "IX2Uzr/UQ3nrdM7U6wMBFA=="
 )
 
 func TestSerfFilterCompare(t *testing.T) {
@@ -67,6 +69,10 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 	if client == nil {
 		t.Errorf("Connect to default address return opened client. Did you setup test environment?")
 	}
+}
+
+func TestConnectSerfAgentWithAuthKey(t *testing.T) {
+	client, err := connectSerfAgentWithAuthKey(testSerfRPCAddressWithAuth, serfAuthKey)
 }
 
 func TestGetSerfMembers(t *testing.T) {
