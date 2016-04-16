@@ -3,10 +3,10 @@ GOLANG_IMAGE = golang:1.6-alpine
 TEST_CONTAINER_IDS_FILE = setup-test.container-ids
 
 get-deps:
-	go get -u github.com/golang/lint/golint
-	go get -u github.com/hashicorp/serf/client
-	go get -u github.com/miekg/dns
-	go get -u github.com/paked/configure
+	go get github.com/golang/lint/golint
+	go get github.com/hashicorp/serf/client
+	go get github.com/miekg/dns
+	go get github.com/paked/configure
 
 setup-test:
 	test -f $(TEST_CONTAINER_IDS_FILE) || ./setup-test.sh > $(TEST_CONTAINER_IDS_FILE)
