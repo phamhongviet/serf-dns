@@ -29,6 +29,10 @@ func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
 	return serf_client.NewRPCClient(serfRPCAddress)
 }
 
+func connectSerfAgentWithAuthKey(serfRPCAddress string, serfRPCAuthKey string) (*serf_client.RPCClient, error) {
+	return nil, nil
+}
+
 func closeSerfConnection(client *serf_client.RPCClient) {
 	if client != nil {
 		client.Close()
