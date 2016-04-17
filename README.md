@@ -124,3 +124,4 @@ SERF_AUTH='S3creTT0k3n' ./serf-dns
 * Support hostname query
 * Support configuration with file
 * Clean and test functions in main.go
+* Proper logging
