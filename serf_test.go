@@ -5,7 +5,9 @@ import (
 )
 
 const (
-	testSerfRPCAddress = "serf:7373"
+	testSerfRPCAddress         = "serf:7373"
+	testSerfRPCAddressWithAuth = "serf-auth:7373"
+	serfAuthKey                = "IX2Uzr/UQ3nrdM7U6wMBFA=="
 )
 
 func TestSerfFilterCompare(t *testing.T) {
@@ -44,7 +46,7 @@ func TestSerfFilterCompare(t *testing.T) {
 }
 
 func TestConnectSerfAgentExpectingFailure(t *testing.T) {
-	client, err := connectSerfAgent("127.0.0.1:55555")
+	client, err := connectSerfAgent("127.0.0.1:55555", "")
 	defer closeSerfConnection(client)
 
 	if err == nil {
@@ -57,7 +59,7 @@ func TestConnectSerfAgentExpectingFailure(t *testing.T) {
 }
 
 func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
-	client, err := connectSerfAgent(testSerfRPCAddress)
+	client, err := connectSerfAgent(testSerfRPCAddress, "")
 	defer closeSerfConnection(client)
 
 	if err != nil {
@@ -69,8 +71,26 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 	}
 }
 
+func TestConnectSerfAgentWithAuthKey(t *testing.T) {
+	client, err := connectSerfAgent(testSerfRPCAddressWithAuth, serfAuthKey)
+	defer closeSerfConnection(client)
+
+	if err != nil {
+		t.Errorf("Connect to serf-auth address return error. Did you setup test environment?")
+	}
+
+	if client == nil {
+		t.Errorf("Connect to serf-auth address return nil client. Did you setup test environment?")
+	}
+
+	_, err = client.Members()
+	if err != nil {
+		t.Errorf("Cannot retrieve member list. Wrong RPC auth key?")
+	}
+}
+
 func TestGetSerfMembers(t *testing.T) {
-	client, err := connectSerfAgent(testSerfRPCAddress)
+	client, err := connectSerfAgent(testSerfRPCAddress, "")
 	defer closeSerfConnection(client)
 	if err != nil {
 		t.Errorf("Connect to default address return no error. Did you setup test environment?")

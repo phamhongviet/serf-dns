@@ -25,8 +25,11 @@ func (sf1 *serfFilter) Compare(sf2 serfFilter) bool {
 	return reflect.DeepEqual(sf1.Tags, sf2.Tags)
 }
 
-func connectSerfAgent(serfRPCAddress string) (*serf_client.RPCClient, error) {
-	return serf_client.NewRPCClient(serfRPCAddress)
+func connectSerfAgent(serfRPCAddress string, serfRPCAuthKey string) (*serf_client.RPCClient, error) {
+	return serf_client.ClientFromConfig(&serf_client.Config{
+		Addr:    serfRPCAddress,
+		AuthKey: serfRPCAuthKey,
+	})
 }
 
 func closeSerfConnection(client *serf_client.RPCClient) {

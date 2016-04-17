@@ -45,7 +45,7 @@ func serve(net string, address string) {
 func main() {
 	config.Parse()
 
-	serfClient, err := connectSerfAgent(*configSerfRPCAddress)
+	serfClient, err := connectSerfAgent(*configSerfRPCAddress, *configSerfRPCAuthKey)
 	defer closeSerfConnection(serfClient)
 	if err != nil {
 		fmt.Println(err.Error())
