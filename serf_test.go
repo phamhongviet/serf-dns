@@ -94,7 +94,10 @@ func TestGetSerfMembers(t *testing.T) {
 	client, err := connectSerfAgent(testSerfRPCAddress, "")
 	defer closeSerfConnection(client)
 	if err != nil {
-		t.Errorf("Connect to default address return no error. Did you setup test environment?")
+		t.Errorf("Connect to default address return no error: %s", err.Error())
+	}
+	if client == nil {
+		t.FailNow()
 	}
 
 	filter := serfFilter{
