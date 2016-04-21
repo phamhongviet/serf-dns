@@ -13,9 +13,8 @@ var (
 )
 
 func init() {
-	config.Use(configure.NewFlagWithUsage(usage))
 	config.Use(configure.NewEnvironment())
-	config.Use(configure.NewFlag())
+	config.Use(configure.NewFlagWithUsage(usage))
 }
 
 func usage() string {
