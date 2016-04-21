@@ -81,6 +81,7 @@ func TestConnectSerfAgentWithAuthKey(t *testing.T) {
 
 	if client == nil {
 		t.Errorf("Connect to serf-auth address return nil client. Did you setup test environment?")
+		t.FailNow()
 	}
 
 	_, err = client.Members()
