@@ -32,6 +32,7 @@ Or to query a server with hostname node7.examp.le:
 $ dig +short node7.examp.le.name.serf
 192.168.7.17
 ```
+_Note_: querying hostname is not implemented yet
 
 
 ## Develop
