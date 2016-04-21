@@ -63,11 +63,11 @@ func TestConnectSerfAgentExpectingSuccess(t *testing.T) {
 	defer closeSerfConnection(client)
 
 	if err != nil {
-		t.Errorf("Connect to default address return no error. Did you setup test environment?")
+		t.Errorf("Connect to default address return error: %s", err.Error())
 	}
 
 	if client == nil {
-		t.Errorf("Connect to default address return opened client. Did you setup test environment?")
+		t.Errorf("Connect to default address return nil client. Did you setup test environment?")
 	}
 }
 
