@@ -126,3 +126,4 @@ SERF_AUTH='S3creTT0k3n' ./serf-dns
 * Support configuration with file
 * Clean and test functions in main.go
 * Proper logging
+* Support custom TTL
