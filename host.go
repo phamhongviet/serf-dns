@@ -23,5 +23,11 @@ func newHostRecord(name string, IP net.IP, TTL uint32) dns.A {
 }
 
 func addHostsToAnswer(hosts []serf_client.Member, messageAnswer []dns.RR) []dns.RR {
-	return nil
+	for _, host := range hosts {
+		var newRR dns.RR
+		newHost := newHostRecord(host.Name, host.Addr, 0)
+		newRR = &newHost
+		messageAnswer = append(messageAnswer, newRR)
+	}
+	return messageAnswer
 }

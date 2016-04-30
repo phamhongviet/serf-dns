@@ -41,5 +41,24 @@ func TestAddHostsToAnswer(t *testing.T) {
 			Addr: net.ParseIP("192.4.5.6"),
 		},
 	}
+
 	message.Answer = addHostsToAnswer(hosts, message.Answer)
+
+	if len(message.Answer) != len(hosts) {
+		t.Errorf("Failed to add hosts to answer. Want: %d. Get: %d", len(hosts), len(message.Answer))
+		t.FailNow()
+	}
+
+	for i, rr := range message.Answer {
+		if rr.Header().Name != hosts[i].Name {
+			t.Errorf("Wrong hostname is added in answer.")
+		}
+
+		rrA, ok := rr.(*dns.A)
+		if ok {
+			if rrA.A.String() != hosts[i].Addr.String() {
+				t.Errorf("Wrong host address is added in answer")
+			}
+		}
+	}
 }
