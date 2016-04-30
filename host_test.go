@@ -4,6 +4,7 @@ import (
 	"net"
 	"testing"
 
+	serf_client "github.com/hashicorp/serf/client"
 	"github.com/miekg/dns"
 )
 
@@ -26,4 +27,19 @@ func TestNewHostRecord(t *testing.T) {
 	if host.Hdr.Ttl != 7 {
 		t.Errorf("Failed to create new host record, wrong TTL.")
 	}
+}
+
+func TestAddHostsToAnswer(t *testing.T) {
+	message := new(dns.Msg)
+	hosts := []serf_client.Member{
+		{
+			Name: "web.role.serf.",
+			Addr: net.ParseIP("192.3.4.5"),
+		},
+		{
+			Name: "web.role.serf.",
+			Addr: net.ParseIP("192.4.5.6"),
+		},
+	}
+	message.Answer = addHostsToAnswer(hosts, message.Answer)
 }

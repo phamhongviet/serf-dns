@@ -3,6 +3,7 @@ package main
 import (
 	"net"
 
+	serf_client "github.com/hashicorp/serf/client"
 	"github.com/miekg/dns"
 )
 
@@ -19,4 +20,8 @@ func newHostRecord(name string, IP net.IP, TTL uint32) dns.A {
 	}
 
 	return host
+}
+
+func addHostsToAnswer(hosts []serf_client.Member, messageAnswer []dns.RR) []dns.RR {
+	return nil
 }
