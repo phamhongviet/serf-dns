@@ -20,12 +20,7 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 		if err != nil {
 			fmt.Println(err.Error())
 		}
-		for _, host := range hosts {
-			var newRR dns.RR
-			newHost := newHostRecord(question.Name, host.Addr, 0)
-			newRR = &newHost
-			message.Answer = append(message.Answer, newRR)
-		}
+		message.Answer = addHostsToAnswer(hosts, question.Name, message.Answer)
 	}
 
 	err := writer.WriteMsg(message)
