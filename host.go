@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net"
 
 	serf_client "github.com/hashicorp/serf/client"
@@ -22,12 +23,11 @@ func newHostRecord(name string, IP net.IP, TTL uint32) dns.A {
 	return host
 }
 
-func addHostsToAnswer(hosts []serf_client.Member, messageAnswer []dns.RR) []dns.RR {
+func addHostsToAnswer(hosts []serf_client.Member, domainName string, messageAnswer []dns.RR) []dns.RR {
 	for _, host := range hosts {
-		var newRR dns.RR
-		newHost := newHostRecord(host.Name, host.Addr, 0)
-		newRR = &newHost
-		messageAnswer = append(messageAnswer, newRR)
+		newHost := newHostRecord(domainName, host.Addr, 0)
+		fmt.Println(host.Name)
+		messageAnswer = append(messageAnswer, &newHost)
 	}
 	return messageAnswer
 }

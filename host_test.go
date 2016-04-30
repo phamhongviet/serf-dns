@@ -33,16 +33,15 @@ func TestAddHostsToAnswer(t *testing.T) {
 	message := new(dns.Msg)
 	hosts := []serf_client.Member{
 		{
-			Name: "web.role.serf.",
 			Addr: net.ParseIP("192.3.4.5"),
 		},
 		{
-			Name: "web.role.serf.",
 			Addr: net.ParseIP("192.4.5.6"),
 		},
 	}
+	domainName := "web.role.serf."
 
-	message.Answer = addHostsToAnswer(hosts, message.Answer)
+	message.Answer = addHostsToAnswer(hosts, domainName, message.Answer)
 
 	if len(message.Answer) != len(hosts) {
 		t.Errorf("Failed to add hosts to answer. Want: %d. Get: %d", len(hosts), len(message.Answer))
@@ -50,7 +49,7 @@ func TestAddHostsToAnswer(t *testing.T) {
 	}
 
 	for i, rr := range message.Answer {
-		if rr.Header().Name != hosts[i].Name {
+		if rr.Header().Name != domainName {
 			t.Errorf("Wrong hostname is added in answer.")
 		}
 
