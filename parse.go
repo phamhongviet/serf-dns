@@ -35,5 +35,5 @@ func findTag(domainName string) (tagValue, tagName, remain string) {
 }
 
 func parseCustomDomainName(domainName string, sftab serfFilterTable) serfFilter {
-	return serfFilter{}
+	return sftab[domainName]
 }
