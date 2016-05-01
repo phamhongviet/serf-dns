@@ -57,15 +57,11 @@ func TestParseCustomDomainName(t *testing.T) {
 		},
 	}
 
-	expect := serfFilter{
-		Name:   "^[0-9].*",
-		Status: "alive",
-	}
-
-	result := parseCustomDomainName("digit.name.serf.", SFTable)
-
-	ok := expect.Compare(result)
-	if !ok {
-		t.Errorf("Failed to parse custom domain name %s", "digit.name.serf.")
+	for dn, sf := range SFTable {
+		resultSF := parseCustomDomainName(dn, SFTable)
+		ok := sf.Compare(resultSF)
+		if !ok {
+			t.Errorf("Failed to parse custom domain name %s", dn)
+		}
 	}
 }
