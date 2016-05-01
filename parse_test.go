@@ -44,7 +44,7 @@ func TestFindTag(t *testing.T) {
 
 func TestParseCustomDomainName(t *testing.T) {
 	SFTable := serfFilterTable{
-		"dead.digit.serf": serfFilter{
+		"dead.digit.serf.": serfFilter{
 			Name:   "^[0-9].*",
 			Status: "failed",
 		},
