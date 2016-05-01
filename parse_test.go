@@ -28,6 +28,20 @@ func TestParseDomainName(t *testing.T) {
 			t.Errorf("Failed to parse custom domain name %s", dn)
 		}
 	}
+
+	domainNameSample := "foo.srv.cali.dc.serf."
+	expect := serfFilter{
+		Tags: map[string]string{
+			"srv": "foo",
+			"dc":  "cali",
+		},
+		Status: "alive",
+	}
+	result := parseDomainName(domainNameSample, SFTable)
+	ok := expect.Compare(result)
+	if !ok {
+		t.Errorf("Failed to parse domain name %s", domainNameSample)
+	}
 }
 
 func TestParseTagsDomainName(t *testing.T) {

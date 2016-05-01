@@ -9,7 +9,7 @@ func parseDomainName(domainName string, sftab serfFilterTable) serfFilter {
 	if customDomainNameExist {
 		return parseCustomDomainName(domainName, sftab)
 	}
-	return serfFilter{}
+	return parseTagsDomainName(domainName)
 }
 
 func parseTagsDomainName(domainName string) serfFilter {
