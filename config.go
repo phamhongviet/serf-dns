@@ -11,6 +11,9 @@ var (
 	configSerfRPCAddress       = config.String("serf", "127.0.0.1:7373", "Serf RPC Address")
 	configSerfRPCAuthKey       = config.String("serf-auth", "", "Serf RPC auth key")
 	configCustomDomainNameFile = config.String("custom", "", "Custom domain name file path")
+
+	// SerfFilterTable is a global table of serf filters loaded at boot
+	SerfFilterTable serfFilterTable
 )
 
 func init() {
