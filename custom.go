@@ -1,5 +1,9 @@
 package main
 
+import (
+	"encoding/json"
+)
+
 type serfFilterTable map[string]serfFilter
 
 func checkCustomDomainNameExistence(domainName string, sftab serfFilterTable) bool {
@@ -8,5 +12,9 @@ func checkCustomDomainNameExistence(domainName string, sftab serfFilterTable) bo
 }
 
 func loadCustomDomainName(data []byte) serfFilterTable {
-	return serfFilterTable{}
+	var sftab serfFilterTable
+
+	// TODO: handle error here
+	json.Unmarshal(data, &sftab)
+	return sftab
 }
