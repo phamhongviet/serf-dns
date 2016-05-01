@@ -33,3 +33,7 @@ func findTag(domainName string) (tagValue, tagName, remain string) {
 	res := strings.SplitN(domainName, ".", 3)
 	return res[0], res[1], res[2]
 }
+
+func parseCustomDomainName(domainName string, sftab serfFilterTable) serfFilter {
+	return serfFilter{}
+}
