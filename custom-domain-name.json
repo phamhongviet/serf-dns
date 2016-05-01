@@ -1,0 +1,21 @@
+{
+    "my-custom-dn-1.serf": {
+        "name": "^web-[0-5][0-9]",
+        "status": "alive",
+        "tags": {
+            "role": "web"
+        }
+    },
+    "failed.web.serf": {
+        "name": "^web-.*",
+        "status": "failed",
+        "tags": {
+            "role": "web"
+        }
+    },
+    "us.dc.serf": {
+        "tags": {
+            "dc": "us-.*"
+        }
+    }
+}

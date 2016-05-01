@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"testing"
 )
 
@@ -35,27 +36,11 @@ func TestCheckCustomDomainNameExistence(t *testing.T) {
 }
 
 func TestLoadCustomDomainName(t *testing.T) {
-	data := `{
-	"my-custom-dn-1.serf": {
-		"name": "^web-[0-5][0-9]",
-		"status": "alive",
-		"tags": {
-			"role": "web"
-		}
-	},
-	"failed.web.serf": {
-		"name": "^web-.*",
-		"status": "failed",
-		"tags": {
-			"role": "web"
-		}
-	},
-	"us.dc.serf": {
-		"tags": {
-			"dc": "us-.*"
-		}
+	data, err := ioutil.ReadFile("custom-domain-name.json")
+	if err != nil {
+		t.Errorf("Error reading data from custom-domain-name.json: %s", err.Error())
 	}
-}`
+
 	expect := serfFilterTable{
 		"my-custom-dn-1.serf": serfFilter{
 			Name:   "^web-[0-5][0-9]",

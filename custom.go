@@ -7,6 +7,6 @@ func checkCustomDomainNameExistence(domainName string, sftab serfFilterTable) bo
 	return ok
 }
 
-func loadCustomDomainName(data string) serfFilterTable {
+func loadCustomDomainName(data []byte) serfFilterTable {
 	return serfFilterTable{}
 }
