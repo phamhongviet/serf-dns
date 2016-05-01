@@ -35,7 +35,7 @@ $ dig +short us-web.serf
 192.168.8.29
 192.168.9.105
 ```
-_Note_: please see [custom-domain-name.md](../custom-domain-name.md "Custom Domain Name") for more information.
+_Note_: please see [custom-domain-name.md](custom-domain-name.md "Custom Domain Name") for more information.
 
 
 ## Develop
@@ -131,7 +131,7 @@ For example, to load custom domain names from /etc/serf-dns/custom.json:
 CUSTOM='/etc/serf-dns/custom.json' ./serf-dns
 ./serf-dns --custom='/etc/serf-dns/custom.json'
 ```
-Please see [custom-domain-name.md](../custom-domain-name.md "Custom Domain Name") for more information.
+Please see [custom-domain-name.md](custom-domain-name.md "Custom Domain Name") for more information.
 
 ## TODO
 
