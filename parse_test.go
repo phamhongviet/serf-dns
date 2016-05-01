@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestParseDomainName(t *testing.T) {
+func TestParseTagsDomainName(t *testing.T) {
 	config.Parse()
 
 	domainNameSample := "foo.srv.cali.dc.serf."
@@ -15,7 +15,7 @@ func TestParseDomainName(t *testing.T) {
 		},
 		Status: "alive",
 	}
-	resultSerfFilter := parseDomainName(domainNameSample)
+	resultSerfFilter := parseTagsDomainName(domainNameSample)
 	ok := expectedSerfFilter.Compare(resultSerfFilter)
 	if !ok {
 		t.Errorf("Failed to parse domain name %s", domainNameSample)

@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func parseDomainName(domainName string) serfFilter {
+func parseTagsDomainName(domainName string) serfFilter {
 	domainName = strings.TrimSuffix(domainName, *configDomainName)
 
 	tags := make(map[string]string)

@@ -15,7 +15,7 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 	message.SetReply(request)
 
 	for _, question := range request.Question {
-		filter := parseDomainName(question.Name)
+		filter := parseTagsDomainName(question.Name)
 		hosts, err := getSerfMembers(serfClient, filter)
 		if err != nil {
 			fmt.Println(err.Error())
