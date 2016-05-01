@@ -26,13 +26,16 @@ $ dig +short oregon.region.redis.service.serf
 192.168.10.12
 ```
 
-Or to query a server with hostname node7.examp.le:
+Or to query a pre-configured domain name `us-web.serf` with name `web-.*` and tag `dc=us-.*`:
 
 ```
-$ dig +short node7.examp.le.name.serf
-192.168.7.17
+$ dig +short us-web.serf
+192.168.6.17
+192.168.7.18
+192.168.8.29
+192.168.9.105
 ```
-_Note_: querying hostname is not implemented yet
+_Note_: please see custom-domain-name.md
 
 
 ## Develop
@@ -120,9 +123,18 @@ SERF_AUTH='S3creTT0k3n' ./serf-dns
 ./serf-dns --serf-auth='S3creTT0k3n'
 ```
 
+* __custom__: path to custom domain name file        
+Default: empty        
+Use environment variable `CUSTOM` or parameter `--custom=`        
+For example, to load custom domain names from /etc/serf-dns/custom.json:       
+```
+CUSTOM='/etc/serf-dns/custom.json' ./serf-dns
+./serf-dns --custom='/etc/serf-dns/custom.json'
+```
+Please see custom-domain-name.md for more information.
+
 ## TODO
 
-* Support hostname query
 * Support configuration with file
 * Clean and test functions in main.go
 * Proper logging
