@@ -4,6 +4,32 @@ import (
 	"testing"
 )
 
+func TestParseDomainName(t *testing.T) {
+	config.Parse()
+
+	SFTable := serfFilterTable{
+		"dead.digit.serf.": serfFilter{
+			Name:   "^[0-9].*",
+			Status: "failed",
+		},
+		"digit.name.serf.": serfFilter{
+			Name:   "^[0-9].*",
+			Status: "alive",
+		},
+		"dead.serf.": serfFilter{
+			Status: "failed",
+		},
+	}
+
+	for dn, sf := range SFTable {
+		resultSF := parseDomainName(dn, SFTable)
+		ok := sf.Compare(resultSF)
+		if !ok {
+			t.Errorf("Failed to parse custom domain name %s", dn)
+		}
+	}
+}
+
 func TestParseTagsDomainName(t *testing.T) {
 	config.Parse()
 

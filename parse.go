@@ -4,6 +4,14 @@ import (
 	"strings"
 )
 
+func parseDomainName(domainName string, sftab serfFilterTable) serfFilter {
+	customDomainNameExist := checkCustomDomainNameExistence(domainName, sftab)
+	if customDomainNameExist {
+		return parseCustomDomainName(domainName, sftab)
+	}
+	return serfFilter{}
+}
+
 func parseTagsDomainName(domainName string) serfFilter {
 	domainName = strings.TrimSuffix(domainName, *configDomainName)
 
