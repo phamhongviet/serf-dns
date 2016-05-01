@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/signal"
 	"syscall"
@@ -15,7 +16,7 @@ func handle(writer dns.ResponseWriter, request *dns.Msg, serfClient *serf_client
 	message.SetReply(request)
 
 	for _, question := range request.Question {
-		filter := parseDomainName(question.Name)
+		filter := parseDomainName(question.Name, SerfFilterTable)
 		hosts, err := getSerfMembers(serfClient, filter)
 		if err != nil {
 			fmt.Println(err.Error())
@@ -39,6 +40,15 @@ func serve(net string, address string) {
 
 func main() {
 	config.Parse()
+
+	if *configCustomDomainNameFile != "" {
+		customDNData, err := ioutil.ReadFile(*configCustomDomainNameFile)
+		if err != nil {
+			fmt.Println(err.Error())
+		} else {
+			SerfFilterTable = loadCustomDomainName(customDNData)
+		}
+	}
 
 	serfClient, err := connectSerfAgent(*configSerfRPCAddress, *configSerfRPCAuthKey)
 	defer closeSerfConnection(serfClient)
