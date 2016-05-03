@@ -8,8 +8,7 @@ publish() {
 	docker push "$DOCKER_REPO":"$DOCKER_TAG"
 }
 
-
-if [ "$(git rev-parse --abbrev-ref HEAD)" = "master" ]; then
+if [ "$TRAVIS_BRANCH" = "master" ]; then
 	DOCKER_TAG="latest"
 	publish
 fi
