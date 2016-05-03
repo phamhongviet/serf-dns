@@ -20,6 +20,4 @@ before_script:
 
 script:
   - make test
-
-deploy:
   - ./publish.sh
