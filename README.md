@@ -1,6 +1,7 @@
 # serf-dns
 
 [![Build Status](https://travis-ci.org/phamhongviet/serf-dns.svg?branch=master)](https://travis-ci.org/phamhongviet/serf-dns)
+[![Docker Repository on Quay](https://quay.io/repository/phamhongviet/serf-dns/status "Docker Repository on Quay")](https://quay.io/repository/phamhongviet/serf-dns)
 
 DNS service with [serf](https://www.serfdom.io "Hashicorp's Serf") backend
 
